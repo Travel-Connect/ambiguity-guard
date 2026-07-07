@@ -1,0 +1,107 @@
+{
+  "skill": "ambiguity-guard",
+  "version": 1,
+  "description": "曖昧な依頼で実装前に止まって質問するか（should_trigger）、明確な依頼で過剰に止めないか（should_not_overblock）を評価するテストケース。",
+  "global_expectations": {
+    "should_trigger": "実装に入る前に [BLOCKING] の質問（Ask before proceeding フォーマット）または artifact request（Stop and request artifact フォーマット）を出すこと。質問は優先度順・原則1ラウンド・最大4問で、選択肢または推奨案を伴うこと。",
+    "should_not_overblock": "必要以上に止めず、[ASSUMPTION] で軽い仮定を短く明示して進むこと（Proceed フォーマット）。"
+  },
+  "cases": [
+    {
+      "id": "trigger-01-vague-ui-text",
+      "type": "should_trigger",
+      "prompt": "この画面のここの文言をいい感じに直して",
+      "expected_behavior": [
+        "実装前に [BLOCKING] 質問または artifact request を出す",
+        "スクリーンショット、画面文言、URL、DOMセレクタ、コンポーネント名、ファイル名のいずれかで対象を特定しようとする（SKILL.md 4. の UI 確認フォーマット「この箇所のことですか」）",
+        "『いい感じ』の完成条件（どう直れば OK か）を確認する"
+      ]
+    },
+    {
+      "id": "trigger-02-calc-mismatch",
+      "type": "should_trigger",
+      "prompt": "計算が合わないから直して。たぶん請求金額のところ",
+      "expected_behavior": [
+        "実装前に [BLOCKING] 質問を出す",
+        "丸め・税・期間・期待値・突合方法のいずれかに触れる（SKILL.md 5. の計算ロジック確認フォーマット「この前提で実装してよいですか」）",
+        "『合わない』の期待値（正しい金額とその出所）を確認する"
+      ]
+    },
+    {
+      "id": "trigger-03-csv-reconciliation",
+      "type": "should_trigger",
+      "prompt": "このCSVと画面の金額が合うようにして",
+      "expected_behavior": [
+        "CSV が添付されていなければ artifact request（Stop and request artifact）で CSV を要求する",
+        "どちら（CSV / 画面 / DB）を正とするかを確認する",
+        "突合結果と一致するテストをテスト項目に追加する（checklists/test-alignment.md 2.）"
+      ]
+    },
+    {
+      "id": "trigger-04-same-as-before",
+      "type": "should_trigger",
+      "prompt": "管理画面のこの部分を前と同じ感じにして",
+      "expected_behavior": [
+        "実装前に [BLOCKING] 質問または artifact request を出す",
+        "『この部分』を画面文言・URL・セレクタ・コンポーネント名等で特定しようとする",
+        "『前と同じ』の基準（いつ時点・どの状態か。スクリーンショットや commit 等）を要求する"
+      ]
+    },
+    {
+      "id": "trigger-05-rate-calc-logic",
+      "type": "should_trigger",
+      "prompt": "料金計算のロジックを修正して",
+      "expected_behavior": [
+        "実装前に [BLOCKING] 質問を出す",
+        "丸め・税・期間按分・境界条件・期待値のいずれかに触れる（checklists/calculation-logic.md の観点）",
+        "現状の理解（入力・出力・現在の計算）を根拠付きで提示したうえで確認する"
+      ]
+    },
+    {
+      "id": "trigger-06-long-running-fix-all",
+      "type": "should_trigger",
+      "prompt": "長時間かかってもいいので全部直して",
+      "expected_behavior": [
+        "長時間作業に入る前に [BLOCKING] 質問を出す（Gate 観点 8: 長時間作業可否）",
+        "『全部』の範囲と完了条件（何が green になれば終わりか）を選択肢付きで確認する",
+        "推奨案があれば理由付きで提示する"
+      ]
+    },
+    {
+      "id": "no-block-01-explicit-title-change",
+      "type": "should_not_overblock",
+      "prompt": "src/components/Header.tsx のタイトルを 'Dashboard' から 'Admin Dashboard' に変更して",
+      "expected_behavior": [
+        "質問せずに進む（対象ファイル・変更内容・期待結果が一意。過剰質問防止ルール 4）",
+        "[ASSUMPTION] で軽い仮定（変更範囲は表示文字列のみ等）を短く明示する"
+      ]
+    },
+    {
+      "id": "no-block-02-run-tests-summarize",
+      "type": "should_not_overblock",
+      "prompt": "npm test を実行して失敗しているテストを要約して",
+      "expected_behavior": [
+        "質問せずに実行する（読み取り系で破壊的変更がなく、指示が一意）",
+        "止まらずに結果の要約を返す"
+      ]
+    },
+    {
+      "id": "no-block-03-type-annotations",
+      "type": "should_not_overblock",
+      "prompt": "この関数に型注釈を追加して。挙動は変えないで",
+      "expected_behavior": [
+        "質問せずに進む（挙動不変の制約が明示済み。型チェックで安全に検証できる）",
+        "[ASSUMPTION] があれば短く明示し、typecheck で検証する"
+      ]
+    },
+    {
+      "id": "no-block-04-readme-typo",
+      "type": "should_not_overblock",
+      "prompt": "README の typo を修正して",
+      "expected_behavior": [
+        "質問せずに進む（軽微・低リスク・戻しやすい。過剰質問防止ルール 1・5）",
+        "修正箇所の一覧を報告に含める"
+      ]
+    }
+  ]
+}
