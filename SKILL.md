@@ -1,6 +1,6 @@
 ---
 name: ambiguity-guard
-description: "曖昧な要件（ambiguous requirements）・雑なプロンプト（vague prompt）・長時間作業（long-running task）の依頼で、実装前（before implementation）に認識合わせして出戻り防止（prevent rework）する skill。UI 対象の特定（UI target clarification）、計算ロジック（calculation logic）の仕様確定、検証基準（validation criteria）・テスト突合（test alignment）を先に確定する。明示起動は「/ambiguity-guard」「認識合わせして」等。自動適用は、対象・完成条件・検証方法が不明／「ここ」「この部分」等で UI 対象を特定できない／計算式・丸め等が未確定、のいずれかで長時間実装に入るときのみ（軽微な曖昧さは仮定を明示して進める）。"
+description: 曖昧な依頼のまま長時間の実装に入る前に、認識合わせをする時に使う。「認識合わせして」と言われた時、および対象・完成条件・検証方法のいずれかが特定できないまま長時間作業に入る時に適用する（軽微な曖昧さは対象外）。
 ---
 
 # ambiguity-guard — 実装前の認識合わせで出戻りを防ぐ
