@@ -1,4 +1,4 @@
-# ambiguity-guard 実例集
+# run-ambiguity-guard 実例集
 
 SKILL.md の運用ルールを具体例で示す。番号は SKILL.md の該当セクションに対応。
 

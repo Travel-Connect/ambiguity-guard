@@ -1,5 +1,5 @@
 {
-  "skill": "ambiguity-guard",
+  "skill": "run-ambiguity-guard",
   "version": 1,
   "description": "曖昧な依頼で実装前に止まって質問するか（should_trigger）、明確な依頼で過剰に止めないか（should_not_overblock）を評価するテストケース。",
   "global_expectations": {

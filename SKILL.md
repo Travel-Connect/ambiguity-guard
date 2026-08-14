@@ -1,9 +1,9 @@
 ---
-name: ambiguity-guard
+name: run-ambiguity-guard
 description: 曖昧な依頼のまま長時間の実装に入る前に、認識合わせをする時に使う。「認識合わせして」と言われた時、および対象・完成条件・検証方法のいずれかが特定できないまま長時間作業に入る時に適用する（軽微な曖昧さは対象外）。
 ---
 
-# ambiguity-guard — 実装前の認識合わせで出戻りを防ぐ
+# run-ambiguity-guard — 実装前の認識合わせで出戻りを防ぐ
 
 雑・曖昧な依頼のまま長時間の自律実装に入ると、対象違い・計算仕様違い・検証基準違いで
 成果物を作り直す「出戻り」が起きる。本 skill は、実装に入る前に曖昧さ・不確実性・
@@ -66,7 +66,7 @@ description: 曖昧な依頼のまま長時間の実装に入る前に、認識�
 
 Gate 判定が B または C で質問（または資料要求）を提示するときは、チャットでの提示と
 **同時に**、この skill の `templates/question-dashboard.html` を元に質問内容を埋めた
-単体 HTML を保存する（ユーザーが読みやすい閲覧用のまとめ。completion-dashboard と
+単体 HTML を保存する（ユーザーが読みやすい閲覧用のまとめ。run-completion-dashboard と
 同系統のデザイン）。
 
 - **保存先**: 作業中プロジェクトのルートに `question-dashboard.html` として保存する

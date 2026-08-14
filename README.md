@@ -1,4 +1,4 @@
-# ambiguity-guard
+# run-ambiguity-guard
 
 雑・曖昧なプロンプトのまま Claude Code が長時間実装に入るのを防ぎ、
 実装前に認識合わせ（対象特定・計算仕様・検証基準）を行って出戻りを防止する skill。
@@ -25,7 +25,7 @@
 ## 自動発火しない場合の手動呼び出し
 
 ```
-/ambiguity-guard この画面の料金表示を直して
+/run-ambiguity-guard この画面の料金表示を直して
 ```
 
 または依頼文に「認識合わせして」「出戻り防止で進めて」「仕様を確認してから実装して」
@@ -36,7 +36,7 @@
 - 曖昧な依頼 → 実装前に `[BLOCKING]` 付きの質問（優先度順・原則 1 ラウンド・最大 4 問・
   選択肢または推奨案付き）か、必要物の要求が出る。
 - B / C の質問時は、質問事項が作業プロジェクト直下の `question-dashboard.html`
-  （completion-dashboard と同系統の閲覧用単体 HTML）にもまとめて保存される。
+  （run-completion-dashboard と同系統の閲覧用単体 HTML）にもまとめて保存される。
   回答は HTML 上ではなくチャット（AskUserQuestion 等）で行う。
 - 明確な依頼 → 止まらずに進む。仮定がある場合のみ `[ASSUMPTION]` が短く付く。
 - 計算ロジックの依頼 → 丸め・税・期間・期待値・突合方法のいずれかが確認される。
@@ -66,7 +66,7 @@
 ## 構成
 
 ```
-ambiguity-guard/
+run-ambiguity-guard/
 ├── SKILL.md                        # 運用ルール本体（Gate・質問・フォーマット）
 ├── checklists/
 │   ├── ui-confirmation.md          # UI 対象特定の詳細チェックリスト
