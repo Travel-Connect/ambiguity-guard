@@ -35,9 +35,8 @@
 
 - 曖昧な依頼 → 実装前に `[BLOCKING]` 付きの質問（優先度順・原則 1 ラウンド・最大 4 問・
   選択肢または推奨案付き）か、必要物の要求が出る。
-- B / C の質問時は、質問事項が作業プロジェクト直下の `question-dashboard.html`
-  （run-completion-dashboard と同系統の閲覧用単体 HTML）にもまとめて保存される。
-  回答は HTML 上ではなくチャット（AskUserQuestion 等）で行う。
+- B / C の質問時は、`html-report` skill の確認フォーム（選択肢＋「送信」ボタンの 1 枚 HTML）で
+  問いが出る。ユーザーは HTML で選んで送信するだけ（2026-11-04 に報告と質問の HTML を html-report に一本化）。
 - 明確な依頼 → 止まらずに進む。仮定がある場合のみ `[ASSUMPTION]` が短く付く。
 - 計算ロジックの依頼 → 丸め・税・期間・期待値・突合方法のいずれかが確認される。
 - 突合データがある依頼 → 「突合した検証結果と一致すること」がテスト項目に追加される。
@@ -73,8 +72,6 @@ run-ambiguity-guard/
 │   ├── calculation-logic.md        # 計算仕様の確認観点と突合方法
 │   └── test-alignment.md           # 認識合わせをテストに落とす手順
 ├── examples.md                     # 発火例・非発火例の実例集
-├── templates/
-│   └── question-dashboard.html     # 質問事項の閲覧用 HTML テンプレート
 ├── evals/evals.json                # 評価用テストケース
 └── README.md
 ```
